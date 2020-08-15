@@ -1,0 +1,48 @@
+
+<html class=bg>
+<div class="all">
+  <head>
+  <video autoplay muted loop id="bgVideo">
+  <source src="bg.mp4" type="video/mp4">
+</div>
+    <script src="quotes.js"></script>
+    <script>
+    window.onload = init;
+    function init() {
+      generateQuote()
+  }
+
+  function generateQuote() {
+    let quoteSize = QUOTEBANK.length;
+    let randomIndex = Math.floor(Math.random() * quoteSize);
+    let randomQuoteData = QUOTEBANK[randomIndex];
+    let twitterLink = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=";
+    let quoteApiFormat = randomQuoteData.quote.replace(/ /g,"%20");
+    twitterLink += "%22"+ quoteApiFormat;
+    let authorApiFormat = randomQuoteData.author.replace(/ /g,"%20");
+    twitterLink +=  "%22" + " - " + authorApiFormat;
+
+    document.getElementById("tweet-quote").href = twitterLink;
+    document.getElementById("text").innerText = randomQuoteData.quote;
+    document.getElementById("author").innerText = randomQuoteData.author;
+    }
+    </script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Lora:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <wrapper id="quote-box">
+    <div class="container">
+      <div class="pulsate quote" id="text"></div>
+      <div class="pulsate author" id="author"></div>
+    <div class="buttons">
+      <button id="new-quote" onClick="generateQuote();">New Quote</button>
+        <a src= twitterLink id= "tweet-quote">Tweet Quote</a>
+    </div>
+    </div>
+    </wrapper>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js">
+    </script>
+  </body>
+</div>
+</html>
